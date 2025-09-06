@@ -1,0 +1,178 @@
+name: E2E Tests
+
+on:
+  workflow_call:
+    inputs:
+      database_user:
+        description: "Database user for tests"
+        required: false
+        default: "prisma"
+        type: string
+      database_password:
+        description: "Database password for tests"
+        required: false
+        default: "prisma"
+        type: string
+      database_name:
+        description: "Database name for tests"
+        required: false
+        default: "tests"
+        type: string
+      database_port:
+        description: "Database port for tests"
+        required: false
+        default: "5433"
+        type: string
+      jwt_secret:
+        description: "JWT secret for tests"
+        required: false
+        default: "secret"
+        type: string
+      node_version:
+        description: "Node.js version to use"
+        required: false
+        default: "20.x"
+        type: string
+
+jobs:
+  playwright_tests:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: ${{ inputs.database_user }}
+          POSTGRES_PASSWORD: ${{ inputs.database_password }}
+          POSTGRES_DB: ${{ inputs.database_name }}
+        ports:
+          - ${{ inputs.database_port }}:5432
+        options: >-
+          --health-cmd="pg_isready -U ${{ inputs.database_user }}"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    env:
+      DATABASE_URL: postgresql://${{ inputs.database_user }}:${{ inputs.database_password }}@localhost:${{ inputs.database_port }}/${{ inputs.database_name }}
+      DIRECT_URL: postgresql://${{ inputs.database_user }}:${{ inputs.database_password }}@localhost:${{ inputs.database_port }}/${{ inputs.database_name }}
+      JWT_SECRET: ${{ inputs.jwt_secret }}
+      NODE_ENV: test
+      CI: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ inputs.node_version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node_version }}
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+
+      - name: Install Playwright (Chrome and Firefox)
+        run: yarn playwright install chromium firefox
+
+      - name: Generate Prisma types
+        run: yarn generate-types
+        env:
+          DATABASE_URL: postgresql://${{ inputs.database_user }}:${{ inputs.database_password }}@localhost:${{ inputs.database_port }}/${{ inputs.database_name }}
+          DIRECT_URL: postgresql://${{ inputs.database_user }}:${{ inputs.database_password }}@localhost:${{ inputs.database_port }}/${{ inputs.database_name }}
+
+      - name: Prepare test database
+        run: yarn push-db
+        timeout-minutes: 5
+
+      - name: Build project
+        run: yarn build
+        env:
+          CI: true
+          DATABASE_URL: postgresql://${{ inputs.database_user }}:${{ inputs.database_password }}@localhost:${{ inputs.database_port }}/${{ inputs.database_name }}
+          DIRECT_URL: postgresql://${{ inputs.database_user }}:${{ inputs.database_password }}@localhost:${{ inputs.database_port }}/${{ inputs.database_name }}
+
+      - name: Check port status
+        run: |
+          lsof -i :3000 || echo "Port 3000 is free"
+          ps aux | grep -E "(next|node)" | grep -v grep || echo "No Next.js processes found"
+
+      - name: Start Next.js app
+        run: |
+          # Kill any existing process on port 3000
+          pkill -f "next start" || true
+          pkill -f "next dev" || true
+          sleep 2
+          # Check if port 3000 is free
+          if lsof -Pi :3000 -sTCP:LISTEN -t >/dev/null ; then
+            echo "Port 3000 is still in use, waiting..."
+            sleep 5
+          fi
+          yarn start &
+          echo $! > .next.pid
+        env:
+          NODE_ENV: production
+          PORT: 3000
+          DATABASE_URL: postgresql://${{ inputs.database_user }}:${{ inputs.database_password }}@localhost:${{ inputs.database_port }}/${{ inputs.database_name }}
+          DIRECT_URL: postgresql://${{ inputs.database_user }}:${{ inputs.database_password }}@localhost:${{ inputs.database_port }}/${{ inputs.database_name }}
+
+      - name: Wait for Next.js app to be ready
+        run: |
+          for i in {1..30}; do
+            if curl -f http://localhost:3000 > /dev/null 2>&1; then
+              break
+            fi
+            sleep 2
+          done
+
+          # Final check
+          if ! curl -f http://localhost:3000 > /dev/null 2>&1; then
+            echo "App failed to start within timeout"
+            exit 1
+          fi
+
+          # Verify the app is running
+          curl -I http://localhost:3000
+          ps aux | grep -E "(next|node)" | grep -v grep || echo "No Next.js processes found"
+        timeout-minutes: 2
+
+      - name: Run Playwright tests with Chrome
+        run: yarn playwright test --project=chromium
+        env:
+          CI: true
+          NODE_ENV: test
+          PLAYWRIGHT_DISABLE_WEBSERVER: true
+        timeout-minutes: 10
+
+      - name: Run Playwright tests with Firefox
+        run: yarn playwright test --project=firefox
+        env:
+          CI: true
+          NODE_ENV: test
+          PLAYWRIGHT_DISABLE_WEBSERVER: true
+        timeout-minutes: 10
+
+      - name: Stop Next.js app
+        if: always()
+        run: |
+          if [ -f .next.pid ]; then
+            kill $(cat .next.pid) || true
+            rm -f .next.pid
+          fi
+          # Additional cleanup
+          pkill -f "next start" || true
+          pkill -f "next dev" || true
+
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

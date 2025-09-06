@@ -7,7 +7,7 @@ export function Footer() {
     <footer className={styles.footer}>
       <a
         className={styles.icon}
-        href="https://github.com/marusyaganza"
+        href="https://github.com/marusyaganza/stars-travel"
         target="_blank"
       >
         <span className={styles.linkText}>view the project on GitHub</span>

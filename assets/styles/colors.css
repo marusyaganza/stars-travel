@@ -1,0 +1,17 @@
+:root {
+  --light-background: #f7f7f7;
+  --light-gray: #d3d3d3;
+  --medium-gray: #555454;
+  --dark-brown: #381010;
+  --dark-blue: #0f3348;
+  --dark-background: #0b0f1d;
+  --gray-background: #3a3d48;
+  --primary-text: #0b1838;
+  --text-inverted: #ffffff;
+  --accent-yellow: #ffe81f;
+  --accent-gold: #c39955;
+  --error-red: #9e1b1b;
+
+  --danger-background: #ffd3d5;
+  --warm-background: #ffecb3;
+}

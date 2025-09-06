@@ -1,0 +1,14 @@
+.navLink {
+  color: var(--dark-blue);
+  text-decoration: none;
+  font-family: var(--font-secondary);
+  font-weight: 400;
+}
+
+.navLink.active {
+  color: var(--accent-gold);
+}
+
+.navLink:hover {
+  color: var(--primary-text);
+}

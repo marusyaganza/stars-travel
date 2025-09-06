@@ -1,0 +1,59 @@
+.header {
+  display: flex;
+  padding: var(--space-16);
+  background-color: var(--light-background);
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.slideshow {
+  width: 300px;
+  height: 300px;
+}
+
+.hero {
+  color: var(--dark-background);
+  font-size: var(--font-size-m);
+  padding-left: 16px;
+}
+
+.heading {
+  font-size: var(--font-size-l);
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-weight: 400;
+}
+
+.ctaButton {
+  background: linear-gradient(90deg, var(--accent-yellow), var(--accent-gold));
+  color: var(--dark-blue);
+  padding: 0.75em 2em;
+  border: none;
+  border-radius: 0.5em;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 16px 0 rgba(64, 44, 132, 0.12);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  outline: none;
+  text-decoration: none;
+}
+
+.ctaButton:hover,
+.ctaButton:focus {
+  background: linear-gradient(
+    90deg,
+    var(--danger-background),
+    var(--warm-background)
+  );
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 24px 0 rgba(64, 44, 132, 0.18);
+}
+
+.cta {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: var(--space-40);
+}

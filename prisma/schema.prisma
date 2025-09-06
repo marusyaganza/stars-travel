@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator ts_interfaces {
+  provider = "prisma-generator-typescript-interfaces"
+  output   = "../generated/prisma-types.ts"
+}
+
+generator zod {
+  provider = "zod-prisma-types"
+  output   = "../zod"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum ROLE {
+  USER
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      ROLE     @default(USER)
+  createdAt DateTime @default(now())
+  bookings  Flight[] @relation("FlightBookings") // Many-to-many: flights this user booked
+  createdFlights Flight[] @relation("CreatedFlights")
+  chatConversations ChatConversation[] @relation("UserChatConversations")
+}
+
+model Flight {
+  id           String    @id @default(cuid())
+  destination  Planet    @relation("Destination", fields: [destinationId], references: [id], map: "DestinationFK")
+  destinationId String
+  origin       Planet    @relation("Origin", fields: [originId], references: [id], map: "OriginFK")
+  originId      String
+  date         DateTime
+  starship     Starship  @relation(fields: [starshipId], references: [id], map: "StarshipFK")
+  starshipId    String
+  cancelled    Boolean   @default(false)
+  creatorId    String
+  creator      User      @relation("CreatedFlights", fields: [creatorId], references: [id])
+  logo         String?
+  bookedBy     User[]    @relation("FlightBookings")
+}
+
+
+model Starship {
+  id                      String   @id @default(cuid())
+  name                    String   @unique
+  model                   String
+  manufacturer            String
+  length                  Float    
+  max_atmosphering_speed  Float    
+  crew                    Int      
+  passengers              Int      
+  cargo_capacity          Float    
+  hyperdrive_rating       Float    
+  MGLT                    String
+  starship_class          String
+  slug                    String
+  flights                 Flight[]
+  img                     String?
+}
+
+model Planet {
+  id      String   @id @default(cuid())
+  name    String   @unique
+  terrain String
+  climate String
+  slug    String
+  flightsAsDestination Flight[] @relation("Destination")
+  flightsAsOrigin      Flight[] @relation("Origin")
+  img                  String?
+}
+
+enum ChatCharacter {
+  YODA
+  C3PO
+}
+
+model ChatConversation {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation("UserChatConversations", fields: [userId], references: [id], onDelete: Cascade)
+  character ChatCharacter
+  title     String?  // Optional title for the conversation
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  messages  ChatMessage[]
+}
+
+model ChatMessage {
+  id             String          @id @default(cuid())
+  conversationId String
+  conversation   ChatConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  content        String
+  isUser         Boolean         // true for user messages, false for bot responses
+  createdAt      DateTime        @default(now())
+}
+

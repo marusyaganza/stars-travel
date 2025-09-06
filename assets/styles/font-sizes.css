@@ -1,0 +1,26 @@
+/* minor third ratio */
+:root {
+    /* 14px */
+    --font-size-xxs: 0.7rem; 
+
+    /* 16px */
+    --font-size-xs: 0.8rem;
+
+    /* 18px */
+    --font-size-s: 1rem;
+
+    /* 20px */
+    --font-size-m: 1.2rem;
+
+    /* 25px */
+    --font-size-l: 1.44rem;
+
+    /* 35px */
+    --font-size-xl: 1.75rem;
+
+    /* 40px */
+    --font-size-xxl: 2.1rem;
+
+    /* 100px */
+    --font-size-xxxl: 2.5rem;
+}

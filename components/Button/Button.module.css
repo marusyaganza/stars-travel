@@ -1,0 +1,22 @@
+.button {
+  background-color: var(--accent-gold);
+  color: var(--dark-background);
+  border: none;
+  padding: var(--space-8) var(--space-12);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button.sizeS {
+  font-size: var(--font-size-s);
+}
+
+.button.sizeM {
+  font-size: var(--font-size-m);
+  padding: var(--space-12) var(--space-16);
+}
+
+.button:disabled {
+  background-color: var(--medium-gray);
+  color: var(--light-background);
+}

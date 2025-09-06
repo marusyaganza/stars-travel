@@ -1,0 +1,11 @@
+.subHeading {
+  color: var(--accent-yellow);
+  text-align: center;
+  font-size: var(--font-size-xl);
+  margin: var(--space-32);
+}
+
+.page {
+  margin: 0 auto;
+  max-width: 1050px;
+}

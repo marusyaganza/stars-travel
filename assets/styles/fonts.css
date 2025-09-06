@@ -1,0 +1,10 @@
+@font-face {
+  font-family: StarJedi;
+  font-style: normal;
+  src: local("StarJedi"), url("../fonts/Starjedi.woff") format("woff");
+  font-display: swap;
+}
+
+:root {
+  --font-secondary: "StarJedi", sans-serif;
+}

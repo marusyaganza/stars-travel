@@ -1,0 +1,24 @@
+@import "@/assets/styles/colors.css";
+@import "@/assets/styles/fonts.css";
+@import "@/assets/styles/spacing.css";
+@import "@/assets/styles/font-sizes.css";
+@import "@/assets/styles/variables.css";
+
+body {
+  background-color: var(--dark-background);
+  background-image: url("../assets/img/bg.png");
+  background-repeat: repeat;
+  background-size: auto;
+  background-position: top left;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-primary);
+}
+
+input,
+button,
+a {
+  box-sizing: border-box;
+}

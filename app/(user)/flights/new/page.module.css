@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 800px;
+  width: 100%;
+  align-items: center;
+  gap: var(--space-24);
+  background-color: var(--light-background);
+}
+
+.heading {
+  font-family: var(--font-secondary);
+  font-weight: normal;
+  text-align: center;
+  font-size: var(--font-size-l);
+  margin-top: var(--space-64);
+}

@@ -1,0 +1,35 @@
+.spinnerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  margin: 0 auto;
+}
+
+/* Spinner animation */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 4px solid var(--light-gray);
+  border-top: 4px solid var(--accent-gold);
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite; /* Infinite rotation */
+}
+
+/* Loading text styling */
+.loadingText {
+  font-weight: normal;
+  color: var(--accent-gold);
+  font-size: var(--font-size-s);
+  font-family: var(--font-secondary);
+}
+
+/* Spinner keyframes animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,22 @@
+.container {
+  background: var(--light-background);
+  margin: auto;
+  color: var(--dark-background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-12);
+  height: 460px;
+  width: 333px;
+  padding: var(--space-16);
+  text-decoration: none;
+}
+
+.container h3 {
+  margin: 0;
+}
+
+.desc {
+  margin: 0;
+  padding: var(--space-12);
+}

@@ -1,0 +1,14 @@
+.mainHeader {
+  font-family: var(--font-secondary);
+  font-weight: normal;
+  height: 60px;
+  text-align: center;
+  z-index: var(--z-index-1);
+  background-color: var(--dark-background);
+  margin: 0;
+}
+
+.mainHeader a {
+  text-decoration: none;
+  color: var(--light-background);
+}

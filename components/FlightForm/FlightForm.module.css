@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dateInputContainer {
+  display: flex;
+  flex-direction: column;
+}

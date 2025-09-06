@@ -1,0 +1,10 @@
+.select {
+  background-color: var(--gray-background);
+  color: var(--light-background);
+  border: none;
+  padding: var(--space-8) var(--space-12);
+  border-radius: 4px;
+  border: 2px solid var(--accent-gold);
+  cursor: pointer;
+  font-size: var(--font-size-s);
+}

@@ -1,0 +1,82 @@
+.heading {
+  font-family: var(--font-secondary);
+  color: var(--light-background);
+  font-weight: normal;
+  margin: 0;
+  text-align: center;
+}
+
+.subHeading {
+  color: var(--accent-yellow);
+  text-align: center;
+  font-size: var(--font-size-m);
+  margin: 0;
+}
+
+.shortDesc {
+  color: var(--accent-gold);
+  padding: 0 var(--space-12);
+  text-align: center;
+  margin: 0;
+}
+
+.page {
+  margin: 0 auto;
+  padding: var(--space-32);
+  max-width: 1050px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-12);
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.pageSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  align-items: center;
+}
+
+.overview {
+  color: var(--light-background);
+  font-size: var(--font-size-s);
+  line-height: 1.5;
+  border-radius: 15px;
+  padding: var(--space-16);
+  border: 2px solid var(--accent-gold);
+  backdrop-filter: blur(10px);
+}
+.bold {
+  font-weight: 600;
+  color: var(--warm-background);
+}
+
+.funFact {
+  background: linear-gradient(45deg, var(--dark-blue), var(--dark-brown));
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 1px solid var(--accent-gold);
+  position: relative;
+  overflow: hidden;
+  color: var(--light-background);
+  font-size: var(--font-size-s);
+  line-height: 1.5;
+}
+
+.funFact > .subHeading {
+  text-align: left;
+}
+
+.spacePortInfo {
+  background: var(--warm-background);
+  color: var(--primary-text);
+  padding: 1rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--accent-gold);
+  margin: 1rem 0;
+  margin: var(--space-12) 0;
+}

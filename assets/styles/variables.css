@@ -1,0 +1,15 @@
+:root {
+  --primary-box-shadow: 0 4px 3px rgb(0, 0, 0, 25%);
+  --secondary-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 25%);
+  --chatbot-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --z-index-1: 0;
+  --z-index-2: 1;
+  --z-index-3: 2;
+  --z-index-4: 1000;
+  --border-radius-primary: 8px;
+  --border-radius-small: 3px;
+  --border-radius-medium: 15px;
+  --border-radius-large: 25px;
+  --border-radius-circle: 50%;
+  --border-radius-header: 18px 18px 0 0;
+}

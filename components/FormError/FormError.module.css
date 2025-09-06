@@ -1,0 +1,12 @@
+.errorsContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 40px;
+}
+
+.error {
+  color: var(--error-red);
+  margin: var(--space-8);
+  font-family: var(--font-tertiary);
+  font-size: var(--font-size-s);
+}

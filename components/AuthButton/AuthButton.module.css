@@ -1,0 +1,17 @@
+.authButton {
+  background-color: var(--dark-background);
+  color: var(--accent-gold);
+  cursor: pointer;
+  border-radius: 4px;
+  padding: var(--space-8);
+  font-size: var(--font-size-s);
+  font-family: var(--font-primary);
+}
+
+.link {
+  text-decoration: none;
+}
+
+.button {
+  border: 0;
+}

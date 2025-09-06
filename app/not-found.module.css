@@ -1,0 +1,31 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  background: var(--light-background);
+  padding: var(--space-64);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-16);
+}
+
+.heading {
+  font-family: var(--font-secondary);
+  font-weight: normal;
+}
+
+.link {
+  color: var(--dark-background);
+  font-size: var(--font-size-l);
+  text-decoration: none;
+  padding: var(--space-12);
+  border-radius: var(--border-radius-primary);
+  border: 1px solid var(--dark-brown);
+}

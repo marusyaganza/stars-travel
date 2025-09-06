@@ -1,0 +1,16 @@
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  font-family: var(--font-tertiary);
+}
+
+.input {
+  width: 400px;
+  height: 40px;
+  padding: 0 var(--space-12);
+  font-family: var(--font-tertiary);
+  @media (max-width: 768px) {
+    width: 250px;
+  }
+}

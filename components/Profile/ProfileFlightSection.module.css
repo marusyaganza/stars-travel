@@ -1,0 +1,21 @@
+.subHeading {
+  color: var(--accent-gold);
+  text-align: center;
+  font-size: var(--font-size-m);
+  margin: 0;
+}
+
+.noFlights {
+  color: var(--light-background);
+  text-align: center;
+  font-size: var(--font-size-m);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.link {
+  color: var(--warm-background);
+}

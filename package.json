@@ -1,0 +1,70 @@
+{
+  "name": "next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "test:watch": "vitest --watch",
+    "test:e2e": "playwright test --reporter=line",
+    "test:e2e:ui": "playwright test --ui",
+    "lint": "next lint",
+    "generate-types": "prisma generate",
+    "push-db": "prisma db push",
+    "migrate": "prisma migrate dev --name init",
+    "seed": "prisma db seed",
+    "seedFlights": "tsx prisma/seedFlights.ts"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts",
+    "seedFlights": "tsx prisma/seedFlights.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.9.0",
+    "@types/bcrypt": "^5.0.2",
+    "@upstash/ratelimit": "^2.0.6",
+    "@upstash/redis": "^1.35.3",
+    "bcrypt": "^6.0.0",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "jose": "^6.0.11",
+    "next": "15.3.2",
+    "openai": "^5.19.1",
+    "pino": "^9.9.0",
+    "prisma": "^6.9.0",
+    "prisma-generator-typescript-interfaces": "^2.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hot-toast": "^2.6.0",
+    "ua-parser-js": "^2.0.4",
+    "zod": "^3.25.56",
+    "zod-prisma-types": "^3.2.4"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.55.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^5.0.2",
+    "@vitest/coverage-v8": "^3.2.4",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.2",
+    "jsdom": "^26.1.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.2.4"
+  },
+  "volta": {
+    "node": "20.19.0",
+    "yarn": "1.22.19"
+  }
+}

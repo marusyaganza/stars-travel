@@ -49,15 +49,6 @@ This project requires several API keys and environment variables for full functi
 3. **Better Stack**: Sign up at [Better Stack](https://betterstack.com/) and create a log source
 4. **PostgreSQL**: Use Docker (included in setup) or create a cloud database
 
-## 🚀 **Live Deployment**
-
-This project is currently deployed and running in production on **Vercel**:
-
-- **Live Demo**: [Project URL](https://stars-travel.vercel.app/)
-- **Production Environment**: Fully configured with all security features, rate limiting, and AI integration
-- **Performance Monitoring**: Real-time monitoring and logging through Better Stack
-- **Auto-Deployments**: Connected to GitHub for automatic deployments on code changes
-
 ## Security Features
 
 ### CSRF Protection
